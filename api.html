@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sp">
+<head>
+    <!-- *** Consumiendo una API con HTML5, Bootstrap, CSS, JQuery y Javascript Vanilla *** -->
+    <!--Autor: Fabricio Suárez-->
+    <!--Fecha: 2021-09-09-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumiento API</title>
+    <!--Bootstrap y JQuery-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/jpg" href="favicon.jpg"/>
+    <!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&display=swap" rel="stylesheet"> 
+    <!--Estilos-->
+    <style>
+        body {
+            margin-bottom: 60px;
+            font-family: 'Muli', sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><i class="fab fa-js-square"></i> Consumiendo API con Javascript Vanilla</h1>
+                <p>Desarrollado por Fabricio Suárez</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>API:</h3>
+                <p>NASA  Astronomy Picture of the Day: <span id="date"></span><br><a href="https://api.nasa.gov/planetary/apod?api_key=6w8aI1d8nauLsW5qvXJ0WaWOkjb7gTvkl7987Sga" target="_blank"><i class="fas fa-external-link-alt"></i> https://api.nasa.gov/planetary/apod</a></p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <h3 id="title"></h3>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <img class="card-img-top" id="hdurl" src="" alt="Foto Astronómica del Día">
+                    <div class="card-body">
+                        <h4 class="card-title" id="copyright"></h4>
+                        <p class="card-text" id="explanation"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    fetch('https://api.nasa.gov/planetary/apod?api_key=6w8aI1d8nauLsW5qvXJ0WaWOkjb7gTvkl7987Sga').then(function (response) {
+	    return response.json();
+    }).then(function (data) {
+	    
+        // ***** La respuesta en formato de JSON *****
+        
+        //La fecha
+        $("#date").html(data.date);
+        //El Título de la foto
+        $("#title").html(data.title);
+        //La imagen
+        $("#hdurl").attr("src", data.hdurl);
+        //El autor
+        $("#copyright").html(data.copyright);
+        //El texto
+        $("#explanation").html(data.explanation);
+
+        // *******************************************
+
+    }).catch(function (err) {
+	    console.warn('Something went wrong.', err);
+    });
+    
+</script>
+
+</html>
